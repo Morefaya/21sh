@@ -30,6 +30,14 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_dlist
+{
+	void		*content;
+	size_t		content_size;
+	struct s_dlist	*next;
+	struct s_dlist	*prev;
+}			t_dlist;
+
 typedef struct		s_tree
 {
 	void			*content;
@@ -93,6 +101,7 @@ char				**ft_strsplit(char const *str, char a);
 t_list				*ft_lstnew(const void *content, size_t content_size);
 void				ft_lstdelone(t_list **alist, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alist, void (*del)(void *, size_t));
+
 void				ft_lstadd(t_list **alist, t_list *new_lst);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *list, t_list *(*f)(t_list *elem));
@@ -134,4 +143,19 @@ void				ft_lstdel_range(t_list **lst, int range, \
 void				ft_lstadd_range(t_list **lst, t_list *nouvo, int range);
 void				ft_lstrev(t_list **lst);
 int					ft_maxint(const char *str);
+t_dlist			*ft_dlstnew(const void *content, size_t size);
+void			ft_dlstadd_back(t_dlist *dlst, t_dlist *new_link);
+void			ft_dlstadd_fow(t_dlist **dlst, t_dlist *new_link);
+void				ft_dlstdel_range(t_dlist **dlst, int range, \
+		void(*del)(void*, size_t));
+void				ft_dlstdel_addr(t_dlist **dlst, t_dlist *addr, \
+		void(*del)(void*, size_t));
+void			ft_dlstdelone(t_dlist **adlst, void(*del)(void*, size_t));
+void			ft_dlstdel(t_dlist **adlst, void(*del)(void*, size_t));
+void			ft_dlstadd_range(t_dlist **lst, t_dlist *new_l, int range);
+int			ft_dlstcount(t_dlist *dlst);
+void				ft_dlstdel_range(t_dlist **lst, int range, \
+		void(*del)(void*, size_t));
+
+
 #endif

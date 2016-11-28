@@ -30,7 +30,9 @@ ft_wordnb.c ft_strlen_str.c ft_clean.c ft_lstcount.c ft_strinsert.c \
 ft_abs.c ft_lstcpy.c ft_lstrotate.c ft_lstrev_rotate.c ft_lstswap.c \
 ft_lstpush.c ft_lsttrans.c ft_trnew.c ft_trdelone.c ft_trdel.c \
 ft_lstdel_addr.c ft_lstdel_range.c ft_lstadd_range.c ft_lstrev.c \
-ft_maxint.c
+ft_maxint.c ft_dlstnew.c ft_dlstadd_back.c ft_dlstadd_fow.c \
+ft_dlstdelone.c ft_dlstdel.c ft_dlstcount.c ft_dlstadd_range.c \
+ft_dlstdel_range.c
 SRC_DIR = ./src
 SRC_C = $(patsubst %, $(SRC_DIR)/%, $(SRC))
 OBJ = $(patsubst %.c, %.o, $(SRC))
