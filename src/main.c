@@ -39,6 +39,13 @@ void	print_lst_key(t_sh* data)
 	}
 }
 
+void	ctlc_hand(int ctlc_key)
+{
+
+	(void)ctlc_key;
+	ft_printf("\n21sh> ");
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_sh	*data;
@@ -51,11 +58,15 @@ int	main(int ac, char **av, char **env)
 	if ((ret = init_term(data)))
 		return (ret);
 	init_data(data);
-	ft_printf("21sh> ");
+	signal(SIGINT, ctlc_hand);
 	while (42)
 	{
-		if (get_key(data))
-			break ;
+		ft_printf("\n21sh> ");
+		while (42)
+		{
+			if (get_key(data))
+				break ;
+		}
 	}
 	ft_printf("\nline: ");
 	print_lst_key(data);

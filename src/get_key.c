@@ -97,13 +97,10 @@ int	get_key(t_sh *data)
 	read(0, buff, 4);
 	key = *((int*)buff);
 	len = ft_dlstcount(data->lst_key);
-	if (key == ESC)
-		return (1);
+	if (key == CTL_D)
+		exit(0);
 	else if (key == RET)
-	{
-		ft_printf("\n21sh> ");
-		return (0);
-	}
+		return (1);
 	else if (key == UP || key == DOWN)
 		return (0);
 	else if (key == RIGHT)
