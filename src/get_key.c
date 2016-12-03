@@ -98,7 +98,7 @@ int	get_key(t_sh *data)
 	key = *((int*)buff);
 	len = ft_dlstcount(data->lst_key);
 	if (key == CTL_D)
-		exit(0);
+		return (2);
 	else if (key == RET)
 		return (1);
 	else if (key == UP || key == DOWN)

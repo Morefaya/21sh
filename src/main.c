@@ -50,23 +50,33 @@ int	main(int ac, char **av, char **env)
 {
 	t_sh	*data;
 	int	ret;
+	int	cond;
 
 	(void)ac;
 	(void)av;
 	(void)env;
 	data = ret_data();
+	cond = 0;
 	if ((ret = init_term(data)))
 		return (ret);
 	init_data(data);
 	signal(SIGINT, ctlc_hand);
 	while (42)
 	{
-		ft_printf("\n21sh> ");
+		if (cond)
+			ft_printf("\n21sh> ");
+		else
+		{
+			cond = 1;
+			ft_printf("21sh> ");
+		}
 		while (42)
 		{
-			if (get_key(data))
+			if ((ret = get_key(data)))
 				break ;
 		}
+		if (ret == 2)
+			break ;
 	}
 	ft_printf("\nline: ");
 	print_lst_key(data);
