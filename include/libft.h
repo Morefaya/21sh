@@ -156,6 +156,7 @@ void			ft_dlstadd_range(t_dlist **lst, t_dlist *new_l, int range);
 int			ft_dlstcount(t_dlist *dlst);
 void				ft_dlstdel_range(t_dlist **lst, int range, \
 		void(*del)(void*, size_t));
-
+int			ft_dlstcount_next(t_dlist *dlst);
+int			ft_dlstcount_prev(t_dlist *dlst);
 
 #endif

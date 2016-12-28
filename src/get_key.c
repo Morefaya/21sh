@@ -97,18 +97,19 @@ int	get_key(t_sh *data)
 	read(0, buff, 4);
 	key = *((int*)buff);
 	len = ft_dlstcount(data->lst_key);
-	if (key == CTL_D)
-		return (2);
-	else if (key == RET)
-		return (1);
-	else if (key == UP || key == DOWN)
-		return (0);
+	if (key == CTL_D || key == RET || key == UP || key == DOWN)
+		return (key);
 	else if (key == RIGHT)
 		move_r(data);
 	else if (key == LEFT)
 		move_l(data);
 	else if (key == DEL_1 || key == DEL_2)
 		supp_key(data);
+	else if (key == ESC)
+	{
+		write(1, "\a", 1);
+		return (0);
+	}
 	else
 		add_key(data, key);
 	return (0);
