@@ -16,6 +16,7 @@
 # define DEL_2	0x7e335b1b
 # define CTL_D	0x4
 # define CTL_C	0x2
+# define TAB	0x9
 
 # define KEY(x)	((t_key*)(x->content))->key
 # define DATA_LINE(x) ((t_dxion*)(x->content))->dxion

@@ -1,34 +1,101 @@
 #include "ft_sh.h"
 
+static int	get_val(t_sh *data, int index)
+{
+	t_dlist	*lst_key;
+	int	i;
+
+	i = 0;
+	lst_key = data->lst_key;
+	if (index < 0)
+		return (-1);
+	while (lst_key && i++ < index)
+		lst_key = lst_key->next;
+	if (lst_key)
+		return (KEY(lst_key));
+	else
+		return (-1);
+}
+
+static int	get_pos(t_sh *data, int index)
+{
+	int	pos;
+	int	i;
+	int	val;
+
+	pos = 6;
+	i = 0;
+	while (i < index)
+	{
+		pos++;
+		if ((val = get_val(data, i) == TAB))
+		{
+			while (pos % 8)
+				pos++;
+		}
+		else if (val == -1)
+			return (-1);
+		i++;
+	}
+	return (pos);
+}
+
 static void	move_r(t_sh *data)
 {
 	int	len;
+	int	pos;
+	int	cond;
 
+	cond = 0;
 	len = ft_dlstcount(data->lst_key);
 	if (data->index < len)
 	{
-		tputs(tgetstr("nd", NULL), 1, putit);
+		if (get_val(data, data->index) == TAB)
+		{
+			pos = get_pos(data, data->index);
+			while (!cond || pos % 8)
+			{
+				cond = 1;
+				tputs(tgetstr("nd", NULL), 1, putit);
+				pos++;
+			}
+			
+		}
+		else
+			tputs(tgetstr("nd", NULL), 1, putit);
 		data->index++;
 	}
 }
 
 static void	move_l(t_sh *data)
 {
+	t_dlist	*lst_key;
+	int	pos;
+
+	lst_key = data->lst_key;
 	if (data->index)
 	{
-		tputs(tgetstr("le", NULL), 1, putit);
+		if (get_val(data, data->index - 1) == TAB)
+		{
+			pos = get_pos(data, data->index)\
+				- get_pos(data, data->index - 1);
+			while (pos > 0)
+			{
+				tputs(tgetstr("le", NULL), 1, putit);
+				pos--;
+			}
+		}
+		else
+			tputs(tgetstr("le", NULL), 1, putit);
 		data->index--;
 	}
 }
 
-
 static void	supp_key(t_sh *data)
 {
-	if (!data->index)
-		return ;
-	ft_dlstdel_range(&data->lst_key, data->index, V_DEL(del_key));
 	move_l(data);
 	tputs(tgetstr("dc", NULL), 1, putit);
+	ft_dlstdel_range(&data->lst_key, data->index + 1, V_DEL(del_key));
 }
 
 static void	ins_chr(t_sh *data)
