@@ -170,7 +170,10 @@ int	main(int ac, char **av, char **env)
 	}
 	while (data->prev)
 		data = data->prev;
-	p_lst_key(data);
+	//p_lst_key(data);
+	char *str = cvt_dlstkey(data);
+	ft_putendl(str);
+	free(str);
 	ft_dlstdel(&data, V_DEL(del_data));
 	return (0);
 }
